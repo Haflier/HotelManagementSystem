@@ -6,13 +6,14 @@ C:\Users\Pars\c#\HotelManagementSystem\api\bin\Debug\net9.0\api.deps.json
 C:\Users\Pars\c#\HotelManagementSystem\api\bin\Debug\net9.0\api.runtimeconfig.json
 C:\Users\Pars\c#\HotelManagementSystem\api\bin\Debug\net9.0\api.dll
 C:\Users\Pars\c#\HotelManagementSystem\api\bin\Debug\net9.0\api.pdb
+C:\Users\Pars\c#\HotelManagementSystem\api\bin\Debug\net9.0\AutoMapper.dll
+C:\Users\Pars\c#\HotelManagementSystem\api\bin\Debug\net9.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\Pars\c#\HotelManagementSystem\api\bin\Debug\net9.0\Azure.Core.dll
 C:\Users\Pars\c#\HotelManagementSystem\api\bin\Debug\net9.0\Azure.Identity.dll
 C:\Users\Pars\c#\HotelManagementSystem\api\bin\Debug\net9.0\Humanizer.dll
 C:\Users\Pars\c#\HotelManagementSystem\api\bin\Debug\net9.0\Microsoft.AspNetCore.Cryptography.Internal.dll
 C:\Users\Pars\c#\HotelManagementSystem\api\bin\Debug\net9.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 C:\Users\Pars\c#\HotelManagementSystem\api\bin\Debug\net9.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
-C:\Users\Pars\c#\HotelManagementSystem\api\bin\Debug\net9.0\Microsoft.AspNetCore.OpenApi.dll
 C:\Users\Pars\c#\HotelManagementSystem\api\bin\Debug\net9.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\Pars\c#\HotelManagementSystem\api\bin\Debug\net9.0\Microsoft.Build.Locator.dll
 C:\Users\Pars\c#\HotelManagementSystem\api\bin\Debug\net9.0\Microsoft.CodeAnalysis.dll
@@ -155,6 +156,7 @@ C:\Users\Pars\c#\HotelManagementSystem\api\obj\Debug\net9.0\api.AssemblyInfo.cs
 C:\Users\Pars\c#\HotelManagementSystem\api\obj\Debug\net9.0\api.csproj.CoreCompileInputs.cache
 C:\Users\Pars\c#\HotelManagementSystem\api\obj\Debug\net9.0\api.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Pars\c#\HotelManagementSystem\api\obj\Debug\net9.0\api.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Pars\c#\HotelManagementSystem\api\obj\Debug\net9.0\api.sourcelink.json
 C:\Users\Pars\c#\HotelManagementSystem\api\obj\Debug\net9.0\scopedcss\bundle\api.styles.css
 C:\Users\Pars\c#\HotelManagementSystem\api\obj\Debug\net9.0\staticwebassets.build.json
 C:\Users\Pars\c#\HotelManagementSystem\api\obj\Debug\net9.0\staticwebassets.development.json
