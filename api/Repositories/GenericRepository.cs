@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using api.Configuration;
 using api.Data;
+using api.DTOs;
+using api.Exeptions;
 using api.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -65,6 +67,25 @@ namespace apiRepositories
 
         public async Task UpdateAsync(T entity)
         {
+            _context.Update(entity);
+            await _context.SaveChangesAsync();
+        }
+
+         public async Task UpdateAsync<TSource>(int id, TSource source) where TSource : IBaseDto
+        {
+            if (id != source.Id)
+            {
+                throw new BadRequestException("Invalid Id used in request");
+            }
+
+            var entity = await GetAsync(id);
+
+            if(entity == null)
+            {
+                throw new NotFoundException(typeof(T).Name, id);
+            }
+
+            _mapper.Map(source, entity);
             _context.Update(entity);
             await _context.SaveChangesAsync();
         }

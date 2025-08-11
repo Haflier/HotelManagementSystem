@@ -173,3 +173,15 @@ C:\Users\Pars\c#\HotelManagementSystem\api\obj\Debug\net9.0\refint\api.dll
 C:\Users\Pars\c#\HotelManagementSystem\api\obj\Debug\net9.0\api.pdb
 C:\Users\Pars\c#\HotelManagementSystem\api\obj\Debug\net9.0\api.genruntimeconfig.cache
 C:\Users\Pars\c#\HotelManagementSystem\api\obj\Debug\net9.0\ref\api.dll
+C:\Users\Pars\c#\HotelManagementSystem\api\bin\Debug\net9.0\Newtonsoft.Json.dll
+C:\Users\Pars\c#\HotelManagementSystem\api\bin\Debug\net9.0\Serilog.dll
+C:\Users\Pars\c#\HotelManagementSystem\api\bin\Debug\net9.0\Serilog.AspNetCore.dll
+C:\Users\Pars\c#\HotelManagementSystem\api\bin\Debug\net9.0\Serilog.Expressions.dll
+C:\Users\Pars\c#\HotelManagementSystem\api\bin\Debug\net9.0\Serilog.Extensions.Hosting.dll
+C:\Users\Pars\c#\HotelManagementSystem\api\bin\Debug\net9.0\Serilog.Extensions.Logging.dll
+C:\Users\Pars\c#\HotelManagementSystem\api\bin\Debug\net9.0\Serilog.Formatting.Compact.dll
+C:\Users\Pars\c#\HotelManagementSystem\api\bin\Debug\net9.0\Serilog.Settings.Configuration.dll
+C:\Users\Pars\c#\HotelManagementSystem\api\bin\Debug\net9.0\Serilog.Sinks.Console.dll
+C:\Users\Pars\c#\HotelManagementSystem\api\bin\Debug\net9.0\Serilog.Sinks.Debug.dll
+C:\Users\Pars\c#\HotelManagementSystem\api\bin\Debug\net9.0\Serilog.Sinks.File.dll
+C:\Users\Pars\c#\HotelManagementSystem\api\bin\Debug\net9.0\Serilog.Sinks.Seq.dll

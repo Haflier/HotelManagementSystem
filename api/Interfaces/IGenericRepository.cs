@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using api.DTOs;
 
 namespace api.Interfaces 
 {
@@ -13,5 +14,6 @@ namespace api.Interfaces
         Task DeleteAsync(int id);
         Task UpdateAsync(T entity);
         Task<bool> Exists(int id);
+        Task UpdateAsync<TSource>(int id, TSource source) where TSource : IBaseDto;
     }
 }

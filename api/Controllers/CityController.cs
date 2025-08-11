@@ -22,17 +22,18 @@ namespace api.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
+        [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
         {
-            var cityModel = await _cityRepo.GetAllAsync();
 
-            if (cityModel == null)
+            var cityModels = await _cityRepo.GetAllDetailsAsync();
+
+            if (cityModels == null)
             {
                 return NotFound();
             }
 
-            return Ok(_mapper.Map<List<CityDto>>(cityModel));
+            return Ok(_mapper.Map<List<CityDto>>(cityModels));
         }
     }
 }

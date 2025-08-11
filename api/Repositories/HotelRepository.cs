@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using api.Data;
-using api.DTOs.City;
 using api.Interfaces;
 using api.Models;
 using apiRepositories;
@@ -13,30 +12,28 @@ using Microsoft.EntityFrameworkCore;
 
 namespace api.Repositories 
 {
-    public class CityRepository : GenericRepository<City>, ICityRepository
+    public class HotelRepository : GenericRepository<Hotel>, IHotelRepository
     {
         private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
-
-        public CityRepository(ApplicationDbContext context, IMapper mapper) 
+        public HotelRepository(ApplicationDbContext context, IMapper mapper)
         : base(context, mapper)
         {
-            this._context = context;
-            this._mapper = mapper;
+            _context = context;
+            _mapper = mapper;
         }
-
-        public async Task<List<City>> GetAllDetailsAsync()
+        public async Task<Hotel> GetDetails(int? id)
         {
-            var cityModels = await _context.Cities
-                .Include(h => h.Hotels)
-                .ToListAsync();
+            var hotelModel = await _context.Hotels
+                .Include(r => r.Reservations)
+                .FirstOrDefaultAsync(h => h.Id == id);
 
-            if (cityModels == null)
+            if (hotelModel == null)
             {
                 return null;
             }
 
-            return cityModels;
-       }
+            return hotelModel;
+        }
     }
 }

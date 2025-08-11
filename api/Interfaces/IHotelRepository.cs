@@ -2,13 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using api.DTOs.City;
 using api.Models;
 
 namespace api.Interfaces 
 {
-    public interface ICityRepository : IGenericRepository<City>
+    public interface IHotelRepository : IGenericRepository<Hotel>
     {
-        Task<List<City>> GetAllDetailsAsync();
+        Task<Hotel> GetDetails(int? id);
     }
 }
