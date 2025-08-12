@@ -185,3 +185,8 @@ C:\Users\Pars\c#\HotelManagementSystem\api\bin\Debug\net9.0\Serilog.Sinks.Consol
 C:\Users\Pars\c#\HotelManagementSystem\api\bin\Debug\net9.0\Serilog.Sinks.Debug.dll
 C:\Users\Pars\c#\HotelManagementSystem\api\bin\Debug\net9.0\Serilog.Sinks.File.dll
 C:\Users\Pars\c#\HotelManagementSystem\api\bin\Debug\net9.0\Serilog.Sinks.Seq.dll
+C:\Users\Pars\c#\HotelManagementSystem\api\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Pars\c#\HotelManagementSystem\api\bin\Debug\net9.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\Pars\c#\HotelManagementSystem\api\bin\Debug\net9.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\Pars\c#\HotelManagementSystem\api\bin\Debug\net9.0\Microsoft.Identity.Abstractions.dll
+C:\Users\Pars\c#\HotelManagementSystem\api\bin\Debug\net9.0\Newtonsoft.Json.Bson.dll

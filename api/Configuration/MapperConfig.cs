@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using api.DTOs.ApiUser;
 using api.DTOs.City;
 using api.DTOs.Hotel;
 using api.Models;
@@ -20,6 +21,11 @@ namespace api.Configuration
             CreateMap<Hotel, HotelBaseDto>().ReverseMap();
             CreateMap<Hotel, CreateHotelRequestDto>().ReverseMap();
             CreateMap<Hotel, UpdateHotelRequestDto>().ReverseMap();
+
+            CreateMap<ApiUser, ApiUserDto>().ReverseMap();
+            CreateMap<ApiUser, AuthResponseDto>().ReverseMap();
+            CreateMap<ApiUser, LoginDto>().ReverseMap();
+
         }
     }
 }
