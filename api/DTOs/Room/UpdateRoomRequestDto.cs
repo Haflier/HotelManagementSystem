@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace api.DTOs
+namespace api.DTOs.Room 
 {
-    public interface IBaseDto
+    public class UpdateRoomRequestDto : RoomBaseDto
     {
         public int Id { get; set; }
+        public int HotelId { get; set; }
     }
 }

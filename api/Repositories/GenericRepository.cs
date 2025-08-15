@@ -70,24 +70,5 @@ namespace apiRepositories
             _context.Update(entity);
             await _context.SaveChangesAsync();
         }
-
-         public async Task UpdateAsync<TSource>(int id, TSource source) where TSource : IBaseDto
-        {
-            if (id != source.Id)
-            {
-                throw new BadRequestException("Invalid Id used in request");
-            }
-
-            var entity = await GetAsync(id);
-
-            if(entity == null)
-            {
-                throw new NotFoundException(typeof(T).Name, id);
-            }
-
-            _mapper.Map(source, entity);
-            _context.Update(entity);
-            await _context.SaveChangesAsync();
-        }
     }
 }

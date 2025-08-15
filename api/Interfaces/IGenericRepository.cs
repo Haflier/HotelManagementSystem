@@ -14,6 +14,5 @@ namespace api.Interfaces
         Task DeleteAsync(int id);
         Task UpdateAsync(T entity);
         Task<bool> Exists(int id);
-        Task UpdateAsync<TSource>(int id, TSource source) where TSource : IBaseDto;
     }
 }

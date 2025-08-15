@@ -15,6 +15,7 @@ namespace api.Models
         public int BedNumbers { get; set; }
         public bool IsAvailable { get; set; } = true;
         public List<Service> ActiveServices { get; set; }
+        public ICollection<Reservation> Reservations { get; set; }
         [Column(TypeName = "decimal(18, 2)")]
         public decimal BasePricePerDay { get; set; }
         [Column(TypeName = "decimal(18, 2)")]

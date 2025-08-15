@@ -109,10 +109,11 @@ builder.Host.UseSerilog((ctx, lc) => lc.WriteTo.Console().ReadFrom.Configuration
 builder.Services.AddAutoMapper(typeof(MapperConfig));
 
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped<IAuthManager, AuthManager>();
 builder.Services.AddScoped<ICityRepository, CityRepository>();
 builder.Services.AddScoped<IHotelRepository, HotelRepository>();
-builder.Services.AddScoped<IAuthManager, AuthManager>();
-
+builder.Services.AddScoped<IRoomRepository, RoomRepository>();
+builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
 
 var app = builder.Build();
 

@@ -52,7 +52,7 @@ namespace api.Controllers
         [HttpGet("AllDetails/{id:int}")]
         public async Task<IActionResult> GetDetails(int id)
         {
-            var hotelModel = await _hotelRepo.GetAsync(id);
+            var hotelModel = await _hotelRepo.GetDetails(id);
 
             if (hotelModel == null)
             {
@@ -67,6 +67,35 @@ namespace api.Controllers
         {
             var HotelModel = await _hotelRepo.AddAsync(_mapper.Map<Hotel>(hotelDto));
             return CreatedAtAction(nameof(Get), new { id = HotelModel.Id }, HotelModel);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutHotel(int id, UpdateHotelRequestDto hotelDto)
+        {
+            if(id != hotelDto.Id) return BadRequest("Hotel Ids do not match");
+
+            var hotelModel = await _hotelRepo.GetAsync(id);
+            if(hotelModel == null) return BadRequest("Hotel not found");
+
+            _mapper.Map(hotelDto, hotelModel);
+
+            try
+            {
+                await _hotelRepo.UpdateAsync(hotelModel);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!await _hotelRepo.Exists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
         }
 
         [HttpDelete("{id:int}")]

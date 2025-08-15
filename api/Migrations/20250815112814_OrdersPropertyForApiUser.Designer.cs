@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using api.Data;
 
@@ -11,9 +12,11 @@ using api.Data;
 namespace api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250815112814_OrdersPropertyForApiUser")]
+    partial class OrdersPropertyForApiUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -692,11 +695,11 @@ namespace api.Migrations
             modelBuilder.Entity("api.Models.OrderItem", b =>
                 {
                     b.HasOne("api.Models.Drink", "Drink")
-                        .WithMany()
+                        .WithMany("OrderItems")
                         .HasForeignKey("DrinkId");
 
                     b.HasOne("api.Models.Food", "Food")
-                        .WithMany()
+                        .WithMany("OrderItems")
                         .HasForeignKey("FoodId");
 
                     b.HasOne("api.Models.Order", "Order")
@@ -788,6 +791,11 @@ namespace api.Migrations
                     b.Navigation("Hotels");
                 });
 
+            modelBuilder.Entity("api.Models.Drink", b =>
+                {
+                    b.Navigation("OrderItems");
+                });
+
             modelBuilder.Entity("api.Models.Factor", b =>
                 {
                     b.Navigation("Items");
@@ -798,6 +806,11 @@ namespace api.Migrations
                     b.Navigation("OrderDetails");
 
                     b.Navigation("ReserveDetails");
+                });
+
+            modelBuilder.Entity("api.Models.Food", b =>
+                {
+                    b.Navigation("OrderItems");
                 });
 
             modelBuilder.Entity("api.Models.Hotel", b =>

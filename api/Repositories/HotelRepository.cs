@@ -25,7 +25,8 @@ namespace api.Repositories
         public async Task<Hotel> GetDetails(int? id)
         {
             var hotelModel = await _context.Hotels
-                .Include(r => r.Reservations)
+                .Include(r => r.Rooms)
+                .ThenInclude(r => r.Reservations)
                 .FirstOrDefaultAsync(h => h.Id == id);
 
             if (hotelModel == null)

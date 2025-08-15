@@ -1,0 +1,14 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using api.Models;
+
+namespace api.Interfaces 
+{
+    public interface IRoomRepository : IGenericRepository<Room>
+    {
+        Task<Room> GetDetails(int? id);
+        Task<Room> Delete(int? id);
+    }
+}

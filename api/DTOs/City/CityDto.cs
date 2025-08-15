@@ -10,6 +10,6 @@ namespace api.DTOs.City
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
-        public ICollection<HotelBaseDto> Hotels { get; set; } = new List<HotelBaseDto>();
+        public ICollection<HotelForCityDto> Hotels { get; set; } = new List<HotelForCityDto>();
     }
 }

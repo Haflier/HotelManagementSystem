@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using api.Data;
 
@@ -11,9 +12,11 @@ using api.Data;
 namespace api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250815103807_reservationPropertyForRoom")]
+    partial class reservationPropertyForRoom
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -677,7 +680,7 @@ namespace api.Migrations
             modelBuilder.Entity("api.Models.Order", b =>
                 {
                     b.HasOne("api.Models.ApiUser", "User")
-                        .WithMany("Orders")
+                        .WithMany()
                         .HasForeignKey("ApiUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -692,11 +695,11 @@ namespace api.Migrations
             modelBuilder.Entity("api.Models.OrderItem", b =>
                 {
                     b.HasOne("api.Models.Drink", "Drink")
-                        .WithMany()
+                        .WithMany("OrderItems")
                         .HasForeignKey("DrinkId");
 
                     b.HasOne("api.Models.Food", "Food")
-                        .WithMany()
+                        .WithMany("OrderItems")
                         .HasForeignKey("FoodId");
 
                     b.HasOne("api.Models.Order", "Order")
@@ -778,14 +781,17 @@ namespace api.Migrations
 
             modelBuilder.Entity("api.Models.ApiUser", b =>
                 {
-                    b.Navigation("Orders");
-
                     b.Navigation("Reservations");
                 });
 
             modelBuilder.Entity("api.Models.City", b =>
                 {
                     b.Navigation("Hotels");
+                });
+
+            modelBuilder.Entity("api.Models.Drink", b =>
+                {
+                    b.Navigation("OrderItems");
                 });
 
             modelBuilder.Entity("api.Models.Factor", b =>
@@ -798,6 +804,11 @@ namespace api.Migrations
                     b.Navigation("OrderDetails");
 
                     b.Navigation("ReserveDetails");
+                });
+
+            modelBuilder.Entity("api.Models.Food", b =>
+                {
+                    b.Navigation("OrderItems");
                 });
 
             modelBuilder.Entity("api.Models.Hotel", b =>
