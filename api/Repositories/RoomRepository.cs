@@ -68,7 +68,7 @@ namespace api.Repositories
             {
                 roomModel.ActiveServices.Add(service);
                 await _context.SaveChangesAsync();
-                return new RoomService { RoomId = service.Id, ServiceId = service.Id };
+                return new RoomService { RoomId = roomModel.Id, ServiceId = service.Id };
             }
             else
             {
@@ -89,7 +89,7 @@ namespace api.Repositories
             {
                 roomModel?.ActiveServices.Remove(service);
                 await _context.SaveChangesAsync();
-                return new RoomService { RoomId = service.Id, ServiceId = service.Id };
+                return new RoomService { RoomId = roomModel.Id, ServiceId = service.Id };
             }
             else
             {
