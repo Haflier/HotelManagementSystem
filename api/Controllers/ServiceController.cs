@@ -22,7 +22,7 @@ namespace api.Controllers
             _serviceRepos = serviceRepos;
             _mapper = mapper;
         }
-
+        
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
         {

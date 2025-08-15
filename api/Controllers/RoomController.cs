@@ -108,5 +108,31 @@ namespace api.Controllers
 
             return NoContent();
         }
+
+        [HttpPost("{roomId}/services/{serviceId}")]
+        public async Task<IActionResult> AddServiceToRoom(int roomId, int serviceId)
+        {
+            var roomService = await _roomRepo.AddServiceToRoomAsync(roomId, serviceId);
+
+            if (roomService == null)
+            {
+                return NotFound("Room or service not found.");
+            }
+
+            return Ok(_mapper.Map<RoomServiceDto>(roomService));
+        }
+
+        [HttpDelete("{roomId}/services/{serviceId}")]
+        public async Task<IActionResult> RemoveServiceFromRoom(int roomId, int serviceId)
+        {
+            var roomService = await _roomRepo.RemoveServiceFromRoomAsync(roomId, serviceId);
+
+            if (roomService == null)
+            {
+                return NotFound("Room or service not found.");
+            }
+
+            return NoContent();
+        }
     }
 }

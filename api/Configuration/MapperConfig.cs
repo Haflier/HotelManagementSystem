@@ -36,6 +36,8 @@ namespace api.Configuration
             CreateMap<Room, UpdateRoomRequestDto>().ReverseMap();
             CreateMap<Room, RoomForHotelDto>().ReverseMap();
 
+            CreateMap<RoomService, RoomServiceDto>().ReverseMap();
+
             CreateMap<Service, ServiceDto>().ReverseMap();
             CreateMap<Service, ServiceBaseDto>().ReverseMap();
             CreateMap<Service, ServiceDetailDto>().ReverseMap();

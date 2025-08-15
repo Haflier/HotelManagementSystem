@@ -13,6 +13,5 @@ namespace api.Models
         public Room Room { get; set; }
         public int ServiceId { get; set; }
         public Service Service { get; set; }
-        public bool IsActive { get; set; } = false;
     }
 }

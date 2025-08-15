@@ -10,7 +10,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace api.Repositories 
+namespace api.Repositories
 {
     public class RoomRepository : GenericRepository<Room>, IRoomRepository
     {
@@ -53,6 +53,48 @@ namespace api.Repositories
             await _context.SaveChangesAsync();
 
             return roomModel;
+        }
+
+        public async Task<RoomService> AddServiceToRoomAsync(int roomId, int serviceId)
+        {
+            var roomModel = await _context.Rooms
+                .Include(a => a.ActiveServices)
+                .Include(r => r.Reservations)
+                .FirstOrDefaultAsync(r => r.Id == roomId);
+
+            var service = await _context.Services.FindAsync(serviceId);
+
+            if (roomModel != null && service != null && !roomModel.ActiveServices.Contains(service))
+            {
+                roomModel.ActiveServices.Add(service);
+                await _context.SaveChangesAsync();
+                return new RoomService { RoomId = service.Id, ServiceId = service.Id };
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public async Task<RoomService> RemoveServiceFromRoomAsync(int roomId, int serviceId)
+        {
+            var roomModel = await _context.Rooms
+                .Include(a => a.ActiveServices)
+                .Include(r => r.Reservations)
+                .FirstOrDefaultAsync(r => r.Id == roomId);
+
+            var service = roomModel?.ActiveServices.FirstOrDefault(s => s.Id == serviceId);
+
+            if (service != null)
+            {
+                roomModel?.ActiveServices.Remove(service);
+                await _context.SaveChangesAsync();
+                return new RoomService { RoomId = service.Id, ServiceId = service.Id };
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

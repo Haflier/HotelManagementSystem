@@ -10,5 +10,7 @@ namespace api.Interfaces
     {
         Task<Room> GetDetails(int? id);
         Task<Room> Delete(int? id);
+        Task<RoomService> AddServiceToRoomAsync(int roomId, int serviceId);
+        Task<RoomService> RemoveServiceFromRoomAsync(int roomId, int serviceId);
     }
 }
