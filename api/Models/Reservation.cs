@@ -11,12 +11,11 @@ namespace api.Models
     public class Reservation
     {
         public int Id { get; set; }
-        public string ChosenRoom { get; set; } = string.Empty;
         public DateTime CheckinDate { get; set; }
         public DateTime CheckOutDate { get; set; }
         [Column(TypeName = "decimal(18, 2)")]
         public decimal PricePerDay { get; set; }
-        public int TotalNights => (CheckinDate - CheckOutDate).Days;
+        public int TotalNights => (CheckOutDate - CheckinDate).Days;
         [Column(TypeName = "decimal(18, 2)")]
         public decimal TotalPrice => TotalNights * PricePerDay;
         public DateTime CreatedAt { get; set; }

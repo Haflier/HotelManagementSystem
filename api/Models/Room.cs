@@ -13,9 +13,9 @@ namespace api.Models
         public int Id { get; set; }
         public string RoomNumber { get; set; } = string.Empty;
         public int BedNumbers { get; set; }
-        public bool IsAvailable { get; set; } = true;
-        public List<Service> ActiveServices { get; set; }
-        public ICollection<Reservation> Reservations { get; set; }
+        public List<DateTime> ReservedDates { get; set; } = new List<DateTime>();
+        public List<Service> ActiveServices { get; set; } = new List<Service>();
+        public ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
         [Column(TypeName = "decimal(18, 2)")]
         public decimal BasePricePerDay { get; set; }
         [Column(TypeName = "decimal(18, 2)")]

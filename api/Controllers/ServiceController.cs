@@ -15,18 +15,18 @@ namespace api.Controllers
     [Route("api/[controller]")]
     public class ServiceController : ControllerBase
     {
-        private readonly IServiceRepository _serviceRepos;
+        private readonly IServiceRepository _serviceRepo;
         private readonly IMapper _mapper;
-        public ServiceController(IServiceRepository serviceRepos, IMapper mapper)
+        public ServiceController(IServiceRepository serviceRepo, IMapper mapper)
         {
-            _serviceRepos = serviceRepos;
+            _serviceRepo = serviceRepo;
             _mapper = mapper;
         }
         
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
         {
-            var serviceModels = await _serviceRepos.GetAllAsync();
+            var serviceModels = await _serviceRepo.GetAllAsync();
 
             if (serviceModels == null)
             {
@@ -40,7 +40,7 @@ namespace api.Controllers
         [HttpGet("{id:int}")]
         public async Task<IActionResult> Get(int id)
         {
-            var serviceModel = await _serviceRepos.GetAsync(id);
+            var serviceModel = await _serviceRepo.GetAsync(id);
 
             if (serviceModel == null)
             {
@@ -54,7 +54,7 @@ namespace api.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateServiceRequestDto serviceDto)
         {
-            var serviceModel = await _serviceRepos.AddAsync(_mapper.Map<Service>(serviceDto));
+            var serviceModel = await _serviceRepo.AddAsync(_mapper.Map<Service>(serviceDto));
             var service = _mapper.Map<ServiceDto>(serviceModel);
             return CreatedAtAction(nameof(Get), new { id = serviceModel.Id }, service);
         }
@@ -64,18 +64,18 @@ namespace api.Controllers
         {
             if (id != serviceDto.Id) return BadRequest("Service Ids do not match");
 
-            var serviceModel = await _serviceRepos.GetAsync(id);
+            var serviceModel = await _serviceRepo.GetAsync(id);
             if (serviceModel == null) return BadRequest("Service not found");
 
             _mapper.Map(serviceDto, serviceModel);
 
             try
             {
-                await _serviceRepos.UpdateAsync(serviceModel);
+                await _serviceRepo.UpdateAsync(serviceModel);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!await _serviceRepos.Exists(id))
+                if (!await _serviceRepo.Exists(id))
                 {
                     return NotFound();
                 }
@@ -91,7 +91,7 @@ namespace api.Controllers
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete(int id)
         {
-            await _serviceRepos.DeleteAsync(id);
+            await _serviceRepo.DeleteAsync(id);
             return NoContent();
         }
             

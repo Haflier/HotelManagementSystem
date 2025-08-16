@@ -11,7 +11,7 @@ namespace api.DTOs.Room
     {
         public string RoomNumber { get; set; } = string.Empty;
         public int BedNumbers { get; set; }
-        public bool IsAvailable { get; set; }
+        public List<DateTime> ReservedDates { get; set; }
         public decimal BasePricePerDay { get; set; }
     }
 }

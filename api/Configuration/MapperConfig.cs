@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 using api.DTOs.ApiUser;
 using api.DTOs.City;
 using api.DTOs.Hotel;
+using api.DTOs.Reservation;
 using api.DTOs.Room;
 using api.DTOs.Service;
+using api.DTOsa.Reservation;
 using api.Models;
 using AutoMapper;
 
@@ -43,6 +45,12 @@ namespace api.Configuration
             CreateMap<Service, ServiceDetailDto>().ReverseMap();
             CreateMap<Service, CreateServiceRequestDto>().ReverseMap();
             CreateMap<Service, UpdateServiceRequestDto>().ReverseMap();
+
+            CreateMap<Reservation, ReservationDto>().ReverseMap();
+            CreateMap<Reservation, ReservationBaseDto>().ReverseMap();
+            CreateMap<Reservation, CreateReservationRequestDto>().ReverseMap();
+            CreateMap<Reservation, UpdateReservationRequestDto>().ReverseMap();
+            CreateMap<Reservation, ReservationForRoomDto>().ReverseMap();
         }
     }
 }
