@@ -115,6 +115,8 @@ builder.Services.AddScoped<IHotelRepository, HotelRepository>();
 builder.Services.AddScoped<IRoomRepository, RoomRepository>();
 builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
 builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
+builder.Services.AddScoped<IFoodRepository, FoodRepository>();
+builder.Services.AddScoped<IDrinkRepository, DrinkRepository>();
 
 var app = builder.Build();
 

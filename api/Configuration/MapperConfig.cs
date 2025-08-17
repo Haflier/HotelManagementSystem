@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using api.DTOs.ApiUser;
 using api.DTOs.City;
+using api.DTOs.Drink;
+using api.DTOs.Food;
 using api.DTOs.Hotel;
 using api.DTOs.Reservation;
 using api.DTOs.Room;
@@ -51,6 +53,16 @@ namespace api.Configuration
             CreateMap<Reservation, CreateReservationRequestDto>().ReverseMap();
             CreateMap<Reservation, UpdateReservationRequestDto>().ReverseMap();
             CreateMap<Reservation, ReservationForRoomDto>().ReverseMap();
+
+            CreateMap<Drink, DrinkDto>().ReverseMap();
+            CreateMap<Drink, DrinkBaseDto>().ReverseMap();
+            CreateMap<Drink, CreateDrinkRequestDto>().ReverseMap();
+            CreateMap<Drink, UpdateDrinkRequestDto>().ReverseMap();
+
+            CreateMap<Food, FoodDto>().ReverseMap();
+            CreateMap<Food, FoodBaseDto>().ReverseMap();
+            CreateMap<Food, CreateFoodRequestDto>().ReverseMap();
+            CreateMap<Food, UpdateFoodRequestDto>().ReverseMap();
         }
     }
 }

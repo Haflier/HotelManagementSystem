@@ -65,6 +65,7 @@ namespace api.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateHotelRequestDto hotelDto)
         {
+            if (hotelDto == null) return BadRequest("Hotel object is null");
             var HotelModel = await _hotelRepo.AddAsync(_mapper.Map<Hotel>(hotelDto));
             return CreatedAtAction(nameof(Get), new { id = HotelModel.Id }, HotelModel);
         }
