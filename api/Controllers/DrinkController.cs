@@ -92,6 +92,12 @@ namespace api.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             await _drinkRepo.DeleteAsync(id);
+
+            if (!await _drinkRepo.Exists(id))
+            {
+                return NotFound("Drink not found.");
+            }
+
             return NoContent();
         }
     }

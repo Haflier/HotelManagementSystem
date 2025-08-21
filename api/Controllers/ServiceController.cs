@@ -92,6 +92,12 @@ namespace api.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             await _serviceRepo.DeleteAsync(id);
+
+            if (!await _serviceRepo.Exists(id))
+            {
+                return NotFound("Service not found.");
+            }
+
             return NoContent();
         }
             

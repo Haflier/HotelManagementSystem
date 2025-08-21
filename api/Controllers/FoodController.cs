@@ -93,6 +93,12 @@ namespace api.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             await _repo.DeleteAsync(id);
+
+            if (!await _repo.Exists(id))
+            {
+                return NotFound("Food not found.");
+            }
+
             return NoContent();
         }
     }

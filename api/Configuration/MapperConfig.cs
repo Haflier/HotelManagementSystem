@@ -7,6 +7,8 @@ using api.DTOs.City;
 using api.DTOs.Drink;
 using api.DTOs.Food;
 using api.DTOs.Hotel;
+using api.DTOs.Order;
+using api.DTOs.OrderItem;
 using api.DTOs.Reservation;
 using api.DTOs.Room;
 using api.DTOs.Service;
@@ -63,6 +65,15 @@ namespace api.Configuration
             CreateMap<Food, FoodBaseDto>().ReverseMap();
             CreateMap<Food, CreateFoodRequestDto>().ReverseMap();
             CreateMap<Food, UpdateFoodRequestDto>().ReverseMap();
+
+            CreateMap<OrderItem, OrderItemDto>().ReverseMap();
+            CreateMap<OrderItem, OrderItemBaseDto>().ReverseMap();
+            CreateMap<OrderItem, CreateOrderItemRequestDto>().ReverseMap();
+            CreateMap<OrderItem, UpdateOrderItemRequestDto>().ReverseMap();
+            CreateMap<OrderItem, OrderItemForOrderDto>().ReverseMap();
+
+            CreateMap<Order, OrderDto>().ReverseMap();
+            CreateMap<Order, OrderBaseDto>().ReverseMap();
         }
     }
 }
