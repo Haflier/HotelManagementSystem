@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata;
@@ -11,5 +12,6 @@ namespace api.Models
     {
         public ICollection<Reservation> Reservations { get; set; }
         public ICollection<Order> Orders { get; set; }
+        public Factor Factor { get; set; }
     }
 }
