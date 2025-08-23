@@ -105,6 +105,15 @@ builder.Services.AddCors(options =>
             .AllowAnyMethod());
 });
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("CustomerPolicy", policy =>
+        policy.RequireRole("Customer", "Administator")); 
+    options.AddPolicy("UserPolicy", policy =>
+        policy.RequireRole("User", "Administator")); 
+});
+
+
 builder.Host.UseSerilog((ctx, lc) => lc.WriteTo.Console().ReadFrom.Configuration(ctx.Configuration));
 
 builder.Services.AddAutoMapper(typeof(MapperConfig));

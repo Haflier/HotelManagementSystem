@@ -45,7 +45,7 @@ namespace api.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "CustomerPolicy")]
         public async Task<IActionResult> Create([FromBody] CreateOrderItemRequestDto orderItemDto)
         {
             var userId = User.FindFirst("uid")?.Value;
