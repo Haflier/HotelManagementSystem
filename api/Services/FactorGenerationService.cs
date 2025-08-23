@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using api.Data;
 using api.Models;
 
@@ -20,6 +16,7 @@ namespace api.Services
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
+        _logger.LogInformation("FactorGenerationService started.");
         while (!stoppingToken.IsCancellationRequested)
         {
             try
@@ -61,7 +58,7 @@ namespace api.Services
                         };
 
                         db.Factors.Add(factor);
-                    }
+                     }
 
                     // Save once for all reservations
                     if (endedReservations.Any())

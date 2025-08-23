@@ -27,20 +27,33 @@ namespace api.Repositories
         public Task<List<DateTime>> DateTimeCalculation(DateTime checkinDate, DateTime checkOutDate)
         {
             var totalNights = (checkOutDate - checkinDate).Days;
-            List<DateTime> BookedDates = new List<DateTime>();
+            var bookedDates = new List<DateTime>();
 
-            BookedDates.Append(checkinDate);
+            // include the check-in day
+            bookedDates.Add(checkinDate);
+
+            // add each subsequent day up until check-out (exclusive)
             for (var day = 1; day < totalNights; day++)
             {
-                BookedDates.Append(checkinDate.AddDays(1));
+                bookedDates.Add(checkinDate.AddDays(day));
             }
 
-            return Task.FromResult(BookedDates);
+            return Task.FromResult(bookedDates);
         }
 
         public async Task<Room?> GetRoomAsync(int id)
         {
             return await _context.Rooms.FirstOrDefaultAsync(r => r.Id == id);
         }
+
+        public async Task<List<Reservation>> GetReservationsByRoomId(int roomId, DateTime checkinDate, DateTime checkOutDate)
+        {
+            // Only fetch reservations that could possibly overlap
+            return await _context.Reservations.Where(r => r.RoomId == roomId &&
+                    r.CheckinDate < checkOutDate &&  // reservation ends after the requested start
+                    r.CheckOutDate > checkinDate)    // reservation starts before the requested end
+                        .ToListAsync();
+        }
+
     }
 }

@@ -1,13 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 using api.DTOs.Reservation;
 using api.Interfaces;
 using api.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,10 +16,13 @@ namespace api.Controllers
     {
         private readonly IReservationRepository _reservationRepo;
         private readonly IMapper _mapper;
-        public ReservationController(IReservationRepository reservationRepo, IMapper mapper)
+        private readonly UserManager<ApiUser> _userManager;
+        public ReservationController(IReservationRepository reservationRepo, IMapper mapper
+                                        ,UserManager<ApiUser> userManager)
         {
             _reservationRepo = reservationRepo;
             _mapper = mapper;
+            _userManager = userManager;
         }
 
         [HttpGet]
@@ -55,7 +55,7 @@ namespace api.Controllers
         [Authorize]
         public async Task<IActionResult> Create([FromBody] CreateReservationRequestDto reservationDto)
         {
-            var userId = User.FindFirst("uid")?.Value;
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             if (string.IsNullOrEmpty(userId))
                 return Unauthorized("User ID not found in token.");
@@ -69,27 +69,32 @@ namespace api.Controllers
             if (reservationDto.CheckinDate <= DateTime.Now)
                 return BadRequest("Start date must be greater than current date");
 
-            var bookedDates = await _reservationRepo.DateTimeCalculation(reservationDto.CheckinDate, reservationDto.CheckOutDate);
-            if (bookedDates.Any(date => roomModel.ReservedDates
-                .Select(d => d.Date)
-                .Contains(date.Date)))
-            {
+            var overlappingReservations = await _reservationRepo.GetReservationsByRoomId(
+                reservationDto.RoomId, reservationDto.CheckinDate, reservationDto.CheckOutDate
+            );
+            if (overlappingReservations.Any())
                 return BadRequest("Some of the selected dates are already reserved.");
-            }
-
 
             if (!(reservationDto.CheckOutDate < reservationDto.CheckinDate) && !(reservationDto.CheckinDate <= DateTime.Now)
-                && !bookedDates.Any(date => roomModel.ReservedDates.Select(d => d.Date).Contains(date.Date)))
+                && !overlappingReservations.Any())
             {
                 var reservationModel = _mapper.Map<Reservation>(reservationDto);
                 reservationModel.ApiUserId = userId;
                 reservationModel.PricePerDay = roomModel.BasePricePerDay;
                 var resultModel = await _reservationRepo.AddAsync(reservationModel);
                 var reservation = _mapper.Map<ReservationDto>(resultModel);
+
+                var user = await _userManager.GetUserAsync(User);
+                if (await _userManager.IsInRoleAsync(user, "User"))
+                {
+                    await _userManager.RemoveFromRoleAsync(user, "User");
+                    await _userManager.AddToRoleAsync(user, "Customer");
+                }
+
                 return CreatedAtAction(nameof(Get), new { id = resultModel.Id }, reservation);
             }
 
-            return StatusCode(500);
+            return BadRequest();    
         }
 
         [HttpPut("{id:int}")]

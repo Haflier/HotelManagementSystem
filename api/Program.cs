@@ -107,11 +107,16 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy("CustomerPolicy", policy =>
-        policy.RequireRole("Customer", "Administator")); 
     options.AddPolicy("UserPolicy", policy =>
-        policy.RequireRole("User", "Administator")); 
+        policy.RequireRole("User", "Customer", "Admin"));
+
+    options.AddPolicy("CustomerPolicy", policy =>
+        policy.RequireRole("Customer", "Admin"));
+
+    options.AddPolicy("AdminPolicy", policy =>
+        policy.RequireRole("Admin"));
 });
+
 
 
 builder.Host.UseSerilog((ctx, lc) => lc.WriteTo.Console().ReadFrom.Configuration(ctx.Configuration));

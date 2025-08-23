@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using api.DTOs.ApiUser;
 using api.DTOs.City;
 using api.DTOs.Drink;

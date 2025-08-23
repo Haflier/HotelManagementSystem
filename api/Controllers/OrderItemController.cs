@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Security.Claims;
 using api.DTOs.OrderItem;
 using api.Interfaces;
 using api.Models;
@@ -45,10 +42,10 @@ namespace api.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "CustomerPolicy")]
+        [Authorize(Policy = "CustomerPolicy")]
         public async Task<IActionResult> Create([FromBody] CreateOrderItemRequestDto orderItemDto)
         {
-            var userId = User.FindFirst("uid")?.Value;
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             if (orderItemDto == null) return BadRequest("OrderItem object is null");
 

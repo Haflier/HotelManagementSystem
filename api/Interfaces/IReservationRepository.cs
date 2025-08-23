@@ -10,5 +10,6 @@ namespace api.Interfaces
     {
         Task<Room> GetRoomAsync(int id);
         Task<List<DateTime>> DateTimeCalculation(DateTime checkinDate, DateTime checkOutDate);
+        Task<List<Reservation>> GetReservationsByRoomId(int roomId, DateTime checkinDate, DateTime checkOutDate);
     }
 }

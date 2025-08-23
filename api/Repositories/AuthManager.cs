@@ -120,10 +120,10 @@ namespace api.Repositories
 
             var claims = new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.Sub, _user.Email),
+                new Claim(JwtRegisteredClaimNames.Sub, _user.Id), 
+                new Claim(ClaimTypes.NameIdentifier, _user.Id), 
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Email, _user.Email),
-                new Claim("uid", _user.Id),
             }
             .Union(userClaims).Union(roleClaims);
 
