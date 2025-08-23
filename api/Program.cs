@@ -108,13 +108,13 @@ builder.Services.AddCors(options =>
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("UserPolicy", policy =>
-        policy.RequireRole("User", "Customer", "Admin"));
+        policy.RequireRole("User", "Customer", "Administrator"));
 
     options.AddPolicy("CustomerPolicy", policy =>
-        policy.RequireRole("Customer", "Admin"));
+        policy.RequireRole("Customer", "Administrator"));
 
     options.AddPolicy("AdminPolicy", policy =>
-        policy.RequireRole("Admin"));
+        policy.RequireRole("Administrator"));
 });
 
 
@@ -124,6 +124,7 @@ builder.Host.UseSerilog((ctx, lc) => lc.WriteTo.Console().ReadFrom.Configuration
 builder.Services.AddAutoMapper(typeof(MapperConfig));
 
 builder.Services.AddHostedService<FactorGenerationService>();
+builder.Services.AddHostedService<CustomerRoleDowngradeService>();
 
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IAuthManager, AuthManager>();
