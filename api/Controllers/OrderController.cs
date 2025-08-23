@@ -70,13 +70,12 @@ namespace api.Controllers
         [HttpDelete("{id:int}")] 
         public async Task<IActionResult> Delete(int id)
         {
-            await _orderRepo.DeleteAsync(id);
-
             if (!await _orderRepo.Exists(id))
             {
                 return NotFound("Order not found.");
             }
 
+            await _orderRepo.DeleteAsync(id);
             return NoContent();
         }
     }

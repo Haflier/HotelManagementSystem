@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using api.DTOs.ApiUser;
 using api.DTOs.City;
 using api.DTOs.Drink;
+using api.DTOs.Factor;
 using api.DTOs.Food;
 using api.DTOs.Hotel;
 using api.DTOs.Order;
@@ -74,6 +75,11 @@ namespace api.Configuration
 
             CreateMap<Order, OrderDto>().ReverseMap();
             CreateMap<Order, OrderBaseDto>().ReverseMap();
+
+            CreateMap<Factor, FactorDto>().ReverseMap();
+            CreateMap<Factor, FactorBaseDto>().ReverseMap();
+            CreateMap<Factor, CreateFactorRequestDto>().ReverseMap();
+            CreateMap<Factor, UpdateFactorRequestDto>().ReverseMap();
         }
     }
 }

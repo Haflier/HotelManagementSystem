@@ -16,5 +16,7 @@ namespace api.Models
         public decimal FinalPrice { get; set; }
         public string ApiUserId { get; set; }
         public ApiUser User { get; set; }
+        public int? ReservationId { get; set; }
+        public Reservation Reservation { get; set; }
     }
 }

@@ -124,13 +124,12 @@ namespace api.Controllers
         [HttpDelete("{id:int}")] 
         public async Task<IActionResult> Delete(int id)
         {
-            await _reservationRepo.DeleteAsync(id);
-
             if (!await _reservationRepo.Exists(id))
             {
                 return NotFound("Reservation not found.");
             }
 
+            await _reservationRepo.DeleteAsync(id);
             return NoContent();
         }
     }

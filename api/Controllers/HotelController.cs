@@ -102,13 +102,12 @@ namespace api.Controllers
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            await _hotelRepo.DeleteAsync(id);
-
             if (!await _hotelRepo.Exists(id))
             {
                 return NotFound("Hotel not found.");
             }
 
+            await _hotelRepo.DeleteAsync(id);
             return NoContent();
         }
     }

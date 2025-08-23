@@ -4,6 +4,7 @@ using api.Interfaces;
 using api.Middleware;
 using api.Models;
 using api.Repositories;
+using api.Services;
 using apiRepositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -108,6 +109,8 @@ builder.Host.UseSerilog((ctx, lc) => lc.WriteTo.Console().ReadFrom.Configuration
 
 builder.Services.AddAutoMapper(typeof(MapperConfig));
 
+builder.Services.AddHostedService<FactorGenerationService>();
+
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IAuthManager, AuthManager>();
 builder.Services.AddScoped<ICityRepository, CityRepository>();
@@ -119,6 +122,7 @@ builder.Services.AddScoped<IFoodRepository, FoodRepository>();
 builder.Services.AddScoped<IDrinkRepository, DrinkRepository>();
 builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IFactorRepository, FactorRepository>();
 
 var app = builder.Build();
 

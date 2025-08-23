@@ -15,11 +15,11 @@ namespace api.Controllers
     [Route("api/[controller]")]
     public class FoodController : ControllerBase
     {
-        private readonly IFoodRepository _repo;
+        private readonly IFoodRepository _foodRepo;
         private readonly IMapper _mapper;
         public FoodController(IFoodRepository foodRepo, IMapper mapper)
         {
-            _repo = foodRepo;
+            _foodRepo = foodRepo;
             _mapper = mapper;
         }
 
@@ -27,7 +27,7 @@ namespace api.Controllers
         public async Task<IActionResult> GetAll()
         {
 
-            var foodModels = await _repo.GetAllAsync();
+            var foodModels = await _foodRepo.GetAllAsync();
 
             if (foodModels == null)
             {
@@ -40,7 +40,7 @@ namespace api.Controllers
         [HttpGet("{id:int}")]
         public async Task<IActionResult> Get(int id)
         {
-            var foodModel = await _repo.GetAsync(id);
+            var foodModel = await _foodRepo.GetAsync(id);
 
             if (foodModel == null)
             {
@@ -55,7 +55,7 @@ namespace api.Controllers
         {
             if (foodDto == null) return BadRequest("Food object is null");
             
-            var foodModel = await _repo.AddAsync(_mapper.Map<Food>(foodDto));
+            var foodModel = await _foodRepo.AddAsync(_mapper.Map<Food>(foodDto));
             var food = _mapper.Map<FoodDto>(foodModel);
             return CreatedAtAction(nameof(Get), new { id = foodModel.Id }, food);
         }
@@ -65,18 +65,18 @@ namespace api.Controllers
         {
             if (id != foodDto.Id) return BadRequest("Food Ids do not match");
 
-            var foodModel = await _repo.GetAsync(id);
+            var foodModel = await _foodRepo.GetAsync(id);
             if (foodModel == null) return BadRequest("Food not found");
 
             _mapper.Map(foodDto, foodModel);
 
             try
             {
-                await _repo.UpdateAsync(foodModel);
+                await _foodRepo.UpdateAsync(foodModel);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!await _repo.Exists(id))
+                if (!await _foodRepo.Exists(id))
                 {
                     return NotFound();
                 }
@@ -92,13 +92,12 @@ namespace api.Controllers
         [HttpDelete("{id:int}")] 
         public async Task<IActionResult> Delete(int id)
         {
-            await _repo.DeleteAsync(id);
-
-            if (!await _repo.Exists(id))
+            if (!await _foodRepo.Exists(id))
             {
                 return NotFound("Food not found.");
             }
 
+            await _foodRepo.DeleteAsync(id);
             return NoContent();
         }
     }
